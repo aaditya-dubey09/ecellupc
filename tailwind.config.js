@@ -26,6 +26,8 @@ export default {
       },
       animation: {
         'blob': 'blob 7s infinite',
+        'ping-slow': 'ping 1s cubic-bezier(0, 0, 0.2, 1) infinite',
+        'fade-out': 'fadeOut 1s ease-out forwards',
       },
       keyframes: {
         blob: {
@@ -33,7 +35,11 @@ export default {
           '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
           '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
           '100%': { transform: 'translate(0px, 0px) scale(1)' },
-        }
+        },
+        fadeOut: {
+          '0%': { opacity: '1', transform: 'scale(1)' },
+          '100%': { opacity: '0', transform: 'scale(0)' },
+        },
       }
     },
   },

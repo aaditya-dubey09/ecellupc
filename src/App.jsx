@@ -1,7 +1,9 @@
-import { Routes, Route, useLocation } from 'react-router-dom'; // RESTORED THESE
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+//import ParticlesBackground from './components/ParticlesBackground';
+import CursorTrail from './components/CursorTrail';
 
 // Import the actual pages
 import Home from './pages/Home';
@@ -22,12 +24,24 @@ const ScrollToTop = () => {
 
 function App() {
   return (
-    // NO <Router> TAG HERE! It is already in main.jsx
     <>
       <ScrollToTop />
-      <div className="bg-primary-dark min-h-screen flex flex-col font-sans text-white">
+      
+      {/* --- 1. GLOBAL BACKGROUND (Particles) --- */}
+      {/* Fixed position ensures it covers the screen without creating extra scroll space */}
+      {/* <div className="fixed inset-0 z-0 pointer-events-none">*/}
+      {/*   <ParticlesBackground />*/}
+      {/* </div>*/}
+
+      {/* --- 2. CURSOR TRAIL --- */}
+      <CursorTrail />
+
+      {/* --- 3. MAIN CONTENT --- */}
+      {/* relative & z-10 ensures text sits ON TOP of the particles */}
+      <div className="relative z-10 flex flex-col min-h-screen">
         <Navbar />
         
+        {/* 'grow' pushes the footer to the bottom */}
         <main className="grow">
           <Routes>
             <Route path="/" element={<Home />} />

@@ -99,7 +99,7 @@ const Home = () => {
   const yBg = useTransform(scrollY, [0, 1000], [0, 200]);
 
   return (
-    <div className="relative min-h-screen bg-primary-dark overflow-hidden">
+    <div className="relative min-h-screen bg-primary-dark/80 overflow-hidden">
       
       {/* 1. FIXED PARALLAX BACKGROUND LAYER */}
       <motion.div 
