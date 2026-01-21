@@ -25,16 +25,24 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="p-2 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg group-hover:rotate-12 transition-transform">
-            <Rocket className="text-white w-6 h-6" />
-          </div>
-          <span className="text-2xl font-display font-bold text-white tracking-wide">
-            E-Cell <span className="text-accent">UPC</span>
-          </span>
-        </Link>
 
+        {/* Logo Section */}
+<Link to="/" className="flex items-center gap-2 group">
+  {/* The Icon Container (Keeps the Tilt & Gradient) */}
+  <div className="rounded-lg group-hover:rotate-12 transition-transform">
+    {/* Replaced Rocket with your Logo Image */}
+    <img 
+      src="assets/Ecell_Logo.png"  // <--- CHECK YOUR FILE EXTENSION (.png, .jpg, .jpeg?)
+      alt="E-Cell Logo" 
+      className="w-10 h-10 object-contain" // Keeps it small and fitted inside the box
+    />
+  </div>
+  
+  {/* The Text */}
+  <span className="text-2xl font-display font-bold text-white tracking-wide">
+    E-Cell <span className="text-accent">UPC</span>
+  </span>
+</Link>
         {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-8">
           {NAV_LINKS.map((link) => (

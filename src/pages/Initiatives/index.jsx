@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { INITIATIVES } from '../../data/MockData';
 import InitiativeCard from './InitiativeCard';
+import EventCalendar from './EventCalendar'; // <--- IMPORT THE NEW CALENDAR
 import { ChevronRight } from 'lucide-react';
 
 const Initiatives = () => {
@@ -25,16 +26,15 @@ const Initiatives = () => {
         </div>
 
         {/* Dashboard Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 h-[800px] lg:h-[600px]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 h-[800px] lg:h-[600px] mb-20">
           
-          {/* LEFT COLUMN: Vertical Tabs 
-          <div className="lg:col-span-3 flex flex-col gap-3 overflow-y-auto pr-2 custom-scrollbar">  */}
-          <div className="lg:col-span-3 flex flex-col gap-3 h-[200px] lg:h-auto overflow-y-auto ...">
+          {/* LEFT COLUMN: Vertical Tabs */}
+          <div className="lg:col-span-3 flex flex-col gap-3 h-[200px] lg:h-auto overflow-y-auto pr-2 custom-scrollbar"> 
             {INITIATIVES.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setActiveId(item.id)}
-                className={`group relative p-6 rounded-xl text-left transition-all duration-300 border border-transparent ${
+                className={`group relative p-4 rounded-xl text-left transition-all duration-300 border border-transparent ${
                   activeId === item.id 
                     ? 'bg-white/10 border-white/10 shadow-lg' 
                     : 'hover:bg-white/5 text-gray-400 hover:text-white'
@@ -51,12 +51,12 @@ const Initiatives = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <item.icon size={20} className={activeId === item.id ? 'text-white' : 'text-gray-500 group-hover:text-white'} />
-                    <span className={`font-bold text-lg ${activeId === item.id ? 'text-white' : ''}`}>
+                    <span className={`font-bold text-sm md:text-base ${activeId === item.id ? 'text-white' : ''}`}>
                       {item.title}
                     </span>
                   </div>
                   {activeId === item.id && (
-                    <ChevronRight size={18} className="text-white" />
+                    <ChevronRight size={16} className="text-white" />
                   )}
                 </div>
               </button>
@@ -64,7 +64,7 @@ const Initiatives = () => {
           </div>
 
           {/* RIGHT COLUMN: Content Display */}
-          <div className="lg:col-span-9 relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl">
+          <div className="lg:col-span-9 relative bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6 md:p-8 overflow-hidden shadow-2xl">
             {/* Background Blob for Atmosphere */}
             <div className={`absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br ${activeData.color} rounded-full blur-[120px] opacity-20 -translate-y-1/2 translate-x-1/2 transition-colors duration-700 pointer-events-none`}></div>
 
@@ -81,8 +81,11 @@ const Initiatives = () => {
               </motion.div>
             </AnimatePresence>
           </div>
-
         </div>
+
+        {/* NEW SECTION: Event Calendar */}
+        <EventCalendar />
+
       </div>
     </div>
   );

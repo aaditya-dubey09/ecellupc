@@ -1,39 +1,63 @@
 import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
-import { TIMELINE_DATA } from '../../data/MockData';
+// CRITICAL: Check this path! If this file doesn't exist, the page goes blank.
+import { TIMELINE_DATA } from '../../data/MockData'; 
 
 const TimelineNode = ({ data, index }) => {
+  const isEven = index % 2 === 0;
+
   return (
     <motion.div 
-      initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+      initial={{ opacity: 0, x: isEven ? -50 : 50 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className={`flex items-center justify-between mb-24 w-full ${
-        index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
+      className={`flex items-center justify-between mb-12 md:mb-24 w-full ${
+        isEven ? 'flex-row' : 'flex-row-reverse'
       }`}
     >
-      {/* Content Side */}
+      {/* --- CONTENT CARD --- */}
       <div className="w-5/12">
-        <div className={`p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:border-accent/30 transition-colors ${
-           index % 2 === 0 ? 'text-right' : 'text-left'
-        }`}>
-          <span className="text-5xl font-display font-bold text-white/10 absolute top-0 right-35 z-0">
-            {data.year}
-          </span>
-          <div className="relative z-10">
-            <h3 className="text-2xl font-bold text-accent mb-2">{data.title}</h3>
-            <p className="text-gray-400">{data.description}</p>
+        <div className="p-4 md:p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm hover:border-accent/30 transition-colors">
+          
+          {/* HEADER ROW: Stack on Mobile (col), Row on Desktop */}
+          <div className={`flex flex-col gap-1 md:gap-4 mb-2 ${
+            /* PC: If Even, Year Left/Title Right. If Odd, Title Left/Year Right */
+            isEven ? 'md:flex-row justify-between items-start' : 'md:flex-row-reverse justify-between items-start'
+          }`}>
+            
+            {/* 1. THE YEAR (Small label on mobile, Watermark on PC) */}
+            <span className={`text-2xl md:text-5xl font-display font-bold text-white/10 shrink-0 ${
+              /* Mobile: Always align with text. PC: No change needed */
+              isEven ? 'text-right md:text-left' : 'text-left md:text-right'
+            }`}>
+              {data.year}
+            </span>
+
+            {/* 2. THE TITLE */}
+            <h3 className={`text-sm md:text-2xl font-bold text-accent break-words ${
+               isEven ? 'text-right' : 'text-left'
+            }`}>
+              {data.title}
+            </h3>
           </div>
+
+          {/* DESCRIPTION */}
+          <p className={`text-gray-400 text-xs md:text-base ${
+             isEven ? 'text-right' : 'text-left'
+          }`}>
+            {data.description}
+          </p>
+
         </div>
       </div>
 
-      {/* Center Dot */}
+      {/* --- CENTER DOT --- */}
       <div className="w-2/12 flex justify-center relative">
-        <div className="w-4 h-4 rounded-full bg-accent shadow-[0_0_15px_#fbbf24] z-10"></div>
+        <div className="w-3 h-3 md:w-4 md:h-4 rounded-full bg-accent shadow-[0_0_15px_#fbbf24] z-10"></div>
       </div>
 
-      {/* Empty Space for Balance */}
+      {/* --- EMPTY SPACE --- */}
       <div className="w-5/12"></div>
     </motion.div>
   );
@@ -49,7 +73,7 @@ const Timeline = () => {
   const height = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section ref={containerRef} className="py-20 bg-primary relative">
+    <section ref={containerRef} className="py-20 bg-primary relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-6 relative">
         
         {/* The Vertical Line Background */}
@@ -58,7 +82,7 @@ const Timeline = () => {
         {/* The Moving Line (Scroll Linked) */}
         <motion.div 
           style={{ height }}
-          className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-linear-to-b from-accent to-purple-600 top-0 shadow-[0_0_10px_#fbbf24] origin-top"
+          className="absolute left-1/2 transform -translate-x-1/2 w-0.5 bg-gradient-to-b from-accent to-purple-600 top-0 shadow-[0_0_10px_#fbbf24] origin-top"
         ></motion.div>
 
         {/* Timeline Events */}

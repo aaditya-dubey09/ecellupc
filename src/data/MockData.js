@@ -37,7 +37,7 @@ export const INITIATIVES = [
   },
   {
     id: 'nec',
-    title: 'Mentor Mante',
+    title: 'Mentor Mantee',
     tagline: 'Keynote addressing from notable tech personalities',
     description: 'The notable faculty of IIMT noida addressed inspiring speech to youth of UP college',
     stats: { participation: '50+', attendents: '250+', opportunity: 'Mentorship' },
@@ -73,7 +73,7 @@ export const TEAM_MEMBERS = [
   },
   {
     id: 4,
-    name: 'Subhi Tripathi',
+    name: 'Shubhi Tripathi',
     role: 'Co-convener',
     image: 'assets/Subhi.png',
     linkedin: '#',
@@ -169,7 +169,7 @@ export const TEAM_MEMBERS = [
   },
   {
     id: 17,
-    name: 'Neeraj Prajapati',
+    name: 'Niraj Prajapati',
     role: 'PR team',
     image: 'assets/Neeraj.jpeg',
     linkedin: '#',
