@@ -40,8 +40,6 @@ function App() {
       <CursorTrail />
 
       <div className="relative z-10 flex flex-col min-h-screen">
-        <Header />
-        <Navbar />
         {/* Only show Main Navbar if NOT on Udai page */}
         {!isUdaiPage && <Navbar />}
         

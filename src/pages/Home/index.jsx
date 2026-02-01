@@ -85,17 +85,21 @@ const Home = () => {
   return (
     <div className="relative min-h-screen bg-primary-dark">
 
+      {/* --- MIDDLE GROUND BACKGROUND --- */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div
           style={{ y: yBg }}
           className="absolute top-0 left-0 w-full h-[120%]"
         >
           <img
-            src="assets/upc.webp"
+            src="assets/upc.jpg"
             alt="Campus"
-            className="w-full h-full object-cover opacity-25 blur-[1px]"
+            // CHANGE: blur-[3px] (not too sharp, not too fuzzy)
+            // CHANGE: brightness-75 (dimmed slightly, but keeps colors visible)
+            className="w-full h-full object-cover opacity-60 blur-[3px] brightness-75"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/20 via-primary-dark/40 to-primary-dark" />
+          {/* CHANGE: Medium overlay (40% to 80% opacity) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/40 via-primary-dark/60 to-primary-dark" />
         </motion.div>
       </div>
 
