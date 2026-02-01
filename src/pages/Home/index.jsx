@@ -79,26 +79,27 @@ const FeatureCard = ({ title, desc, icon: Icon, color, delay }) => (
 const Home = () => {
   const { scrollY } = useScroll();
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+  // Parallax Logic
   const rawY = useTransform(scrollY, [0, 1000], [0, 150]);
   const yBg = useSpring(rawY, springConfig);
 
   return (
     <div className="relative min-h-screen bg-primary-dark">
 
-      {/* --- MIDDLE GROUND BACKGROUND --- */}
+      {/* --- BACKGROUND WITH PARALLAX ON MOBILE ENABLED --- */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div
-          style={{ y: yBg }}
-          className="absolute top-0 left-0 w-full h-[120%]"
+          style={{ y: yBg }} // Parallax movement active
+          className="absolute -top-[10%] left-0 w-full h-[120%] md:h-[120%]"// 120% height allows space for movement
         >
           <img
             src="assets/upc.jpg"
             alt="Campus"
-            // CHANGE: blur-[3px] (not too sharp, not too fuzzy)
-            // CHANGE: brightness-75 (dimmed slightly, but keeps colors visible)
-            className="w-full h-full object-cover opacity-60 blur-[3px] brightness-75"
+            // object-center: Keeps the middle of the building in view
+            // blur-[3px]: Soft modern blur
+            // brightness-75: Readable text
+            className="w-full h-full object-cover object-center opacity-60 blur-[3px] brightness-75"
           />
-          {/* CHANGE: Medium overlay (40% to 80% opacity) */}
           <div className="absolute inset-0 bg-gradient-to-b from-primary-dark/40 via-primary-dark/60 to-primary-dark" />
         </motion.div>
       </div>
